@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "REPLACE-WITH-YOUR-MICROSOFT-APP-ID",
+  "packageName": "com.trusscore.asktrusscore",
+  "developer": {
+    "name": "Trusscore",
+    "websiteUrl": "https://www.trusscore.com",
+    "privacyUrl": "https://www.trusscore.com/privacy",
+    "termsOfUseUrl": "https://www.trusscore.com/terms"
+  },
+  "name": {
+    "short": "Ask Trusscore",
+    "full": "Ask Trusscore — NetSuite AI Assistant"
+  },
+  "description": {
+    "short": "Ask questions about your NetSuite data in plain English.",
+    "full": "Ask Trusscore is an AI-powered assistant that lets Trusscore team members query NetSuite data — customers, orders, inventory, financials — using natural language, directly inside Microsoft Teams."
+  },
+  "icons": {
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
+  },
+  "accentColor": "#003764",
+  "bots": [
+    {
+      "botId": "REPLACE-WITH-YOUR-MICROSOFT-APP-ID",
+      "scopes": ["personal", "team", "groupchat"],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": ["personal", "team", "groupchat"],
+          "commands": [
+            {
+              "title": "AR aging over 90 days",
+              "description": "Show accounts receivable aged over 90 days"
+            },
+            {
+              "title": "Top 5 customers this month",
+              "description": "Revenue by top customers in the current month"
+            },
+            {
+              "title": "Open sales orders",
+              "description": "List open sales orders"
+            },
+            {
+              "title": "Inventory below reorder point",
+              "description": "Items that need replenishment"
+            },
+            {
+              "title": "/reset",
+              "description": "Clear conversation history"
+            },
+            {
+              "title": "/help",
+              "description": "Show example questions and commands"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": []
+}
