@@ -6,6 +6,7 @@
 const { BotFrameworkAdapter } = require('botbuilder');
 const express = require('express');
 const { AskTrusscoreBot } = require('./bot');
+const { getAccessToken } = require('./netsuiteAuth');
 
 const proxy = require('express-http-proxy');
 const app = express();
@@ -23,8 +24,13 @@ app.use('/mcp-proxy', proxy((req) => {
         const base = '/services/mcp/v1/suiteapp/com.netsuite.mcpstandardtools';
         return `${base}${req.url === '/' ? '' : req.url}`;
     },
-    proxyReqOptDecorator: (proxyReqOpts) => {
-        proxyReqOpts.headers['Authorization'] = `Bearer ${process.env.NETSUITE_AUTH_KEY}`;
+    proxyReqOptDecorator: async (proxyReqOpts) => {
+        try {
+            const token = await getAccessToken();
+            proxyReqOpts.headers['Authorization'] = `Bearer ${token}`;
+        } catch (err) {
+            console.error('[Proxy Auth Error]', err.message);
+        }
         return proxyReqOpts;
     },
     https: true,
